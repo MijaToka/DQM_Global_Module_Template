@@ -62,7 +62,11 @@ def main(args):
     in_dir = os.path.join(cwd,"Geometry","v"+args.version,"geometry."+args.version+".txt")
     print(f"Input file: {in_dir}")
 
-    out_dir = os.path.join(cwd, "output","v"+args.version,"geometry_v"+args.version+".root")
+    out_dir = os.path.join(cwd, "output","v"+args.version)
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir,exist_ok=True)
+    out_dir = os.path.join(out_dir,"geometry_v"+args.version+".root")
+    
     print(f"Output directory: {out_dir}")
     ## Open the ModMap file and the output file
     cols = ['plane', 'u', 'v', 'isSiPM', 'x0', 'y0',
