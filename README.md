@@ -13,7 +13,7 @@ git clone https://github.com/MijaToka/DQM_Global_Module_Template.git
 ## Instructions
 To run the code, go into the root direcory of the repository and run:
 ```bash
-python3 HGCalModMapTemplateGen.py [-h] [--version VERSION]
+python3 HGCalModMapTemplateGen.py [-h] [--version VERSION] [--layer_preview]
 ```
 ### Python dependencies
 - ROOT

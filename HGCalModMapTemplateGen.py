@@ -1,5 +1,5 @@
 #import FWCore.ParameterSet.Config as cms
-from ROOT import TFile,TTree,TGraph
+from ROOT import TFile,TTree,TGraph,TH2Poly
 import argparse
 import pandas as pd
 import numpy as np
@@ -53,6 +53,9 @@ def parse_arguments():
 
     parser.add_argument('--version',type=str, 
         default='16.5', help='Which version of the Module maper are you using. Default: 16.5')
+    
+    parser.add_argument('--layer_preview',action="store_true",
+        help="Enables saving a layer-by-layer preview of the modules")
 
     return parser.parse_args()
 
@@ -114,7 +117,7 @@ def main(args):
 
     print('Writing the into the ROOT File.')
     fout = TFile(out_dir,"RECREATE")
-
+    layer_polys = [TH2Poly() for _ in range(47)]
     #Fill the root file
     for module in modMap.itertuples():
         fout.cd('/')
@@ -150,10 +153,18 @@ def main(args):
         #center_position = ROOT.TVector2(module.x0/10,module.y0/10)
 
         graph.Write()
+        layer_polys[int(module.plane) - 1].AddBin(graph)
         tree.Write()
         #center_position.Write("module_x0y0")
         tree.SetDirectory(0)  # Detach so it's not written again
         del tree  # Cleanup reference
+    if args.layer_preview:
+        fout.cd("/")
+        fout.mkdir("Layers")
+        fout.cd("/Layers")
+        for plane in range(1,48):
+            layer_polys[plane-1].SetName(f"Layer_{plane}")
+            layer_polys[plane-1].Write()
 
     fout.Write()
     fout.Close()
