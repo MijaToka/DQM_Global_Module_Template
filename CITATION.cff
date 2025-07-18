@@ -10,7 +10,7 @@ type: software
 authors:
   - given-names: Mijail
     family-names: Tokarev Peñaloza
-    email: mijail.tokarev@gmail.com
+    email: mijail.tokarev@ug.uchile.cl
     affiliation: LLR
 identifiers:
   - type: url
