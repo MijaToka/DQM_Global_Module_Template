@@ -1,0 +1,34 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: DQM_Global_Module_Template
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Mijail
+    family-names: Tokarev Peñaloza
+    email: mijail.tokarev@gmail.com
+    affiliation: LLR
+identifiers:
+  - type: url
+    value: 'https://github.com/MijaToka/DQM_Global_Module_Template'
+    description: DQM Global Template Generate Repo
+repository-code: 'https://github.com/MijaToka/DQM_Global_Module_Template'
+abstract: >-
+  This project creates the DQM global template used for
+  positioning the modules in the HGCal DQM.
+
+
+  It consists of a python script which reads a ModMap from
+  HGCal Integrations ModMap project, and generates a ROOT
+  file which is used in the DQM for HGCal.
+
+
+  The input files are organized in the Gemoetry subdirectory
+  by version (note the file name also reflects the version),
+  and the output files are generated in the outputs
+  subdirectory organized by version as well.
+date-released: '2025-07-31'
