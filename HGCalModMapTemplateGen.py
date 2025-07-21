@@ -164,6 +164,7 @@ def main(args):
         fout.cd("/Layers")
         for plane in range(1,48):
             layer_polys[plane-1].SetName(f"Layer_{plane}")
+            layer_polys[plane-1].SetTitle(f"Layer_{plane}")
             layer_polys[plane-1].Write()
 
     fout.Write()
