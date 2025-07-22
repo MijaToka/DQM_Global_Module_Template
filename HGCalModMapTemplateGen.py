@@ -95,10 +95,12 @@ def main(args):
             for jrot in range(1,3):
                 
                 angle = (2.*np.pi/3)*jrot
-                rot_xy0 = fullRot(x0,y0,angle)
+                sign = 1 if row.plane % 2 == 1 else -1
+
+                rot_xy0 = fullRot(x0,y0,angle) # This is flipped so it doesn't need the sign in the rotation
                 rot_vxy_i = []
+
                 for i in range(7):
-                    sign = 1 if row.plane % 2 == 1 else -1
                     rot_vxy_i += fullRot( getattr(row,f'vx_{i}'), getattr(row,f'vy_{i}'), sign * angle )
 
                 if row.isSiPM:
@@ -109,7 +111,7 @@ def main(args):
                 if row.plane > 26:  rot_icassette = row.icassette + 4*jrot
                 else:               rot_icassette = row.icassette + 2*jrot
 
-                new_row = [row.plane,*rot_uv,row.isSiPM,*rot_xy0,row.nvertices,*rot_vxy_i,rot_icassette]
+                new_row = [row.plane,*rot_uv,row.isSiPM,-rot_xy0[0],rot_xy0[1],row.nvertices,*rot_vxy_i,rot_icassette]
                 new_sectors = pd.concat([new_sectors,pd.DataFrame([new_row],columns=cols)],ignore_index=True)
         modMap = pd.concat([modMap,new_sectors],ignore_index=True)
         modMap = modMap.sort_values(['plane','u','v'])
