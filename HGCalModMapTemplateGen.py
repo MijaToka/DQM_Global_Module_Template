@@ -98,7 +98,8 @@ def main(args):
                 rot_xy0 = fullRot(x0,y0,angle)
                 rot_vxy_i = []
                 for i in range(7):
-                    rot_vxy_i+= fullRot( getattr(row,f'vx_{i}'), getattr(row,f'vy_{i}'), angle )
+                    sign = 1 if row.plane % 2 == 1 else -1
+                    rot_vxy_i += fullRot( getattr(row,f'vx_{i}'), getattr(row,f'vy_{i}'), sign * angle )
 
                 if row.isSiPM:
                     rot_uv = [row.u,row.v+12*jrot]
@@ -153,6 +154,7 @@ def main(args):
         #center_position = ROOT.TVector2(module.x0/10,module.y0/10)
 
         graph.Write()
+        graph.SetName(f"Module_({module.u},{module.v})")
         layer_polys[int(module.plane) - 1].AddBin(graph)
         tree.Write()
         #center_position.Write("module_x0y0")
