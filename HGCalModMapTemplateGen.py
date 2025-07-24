@@ -111,7 +111,7 @@ def main(args):
                 if row.plane > 26:  rot_icassette = row.icassette + 4*jrot
                 else:               rot_icassette = row.icassette + 2*jrot
 
-                new_row = [row.plane,*rot_uv,row.isSiPM,-rot_xy0[0],rot_xy0[1],row.nvertices,*rot_vxy_i,rot_icassette]
+                new_row = [row.plane,*rot_uv,row.isSiPM, sign * rot_xy0[0],rot_xy0[1],row.nvertices,*rot_vxy_i,rot_icassette]
                 new_sectors = pd.concat([new_sectors,pd.DataFrame([new_row],columns=cols)],ignore_index=True)
         modMap = pd.concat([modMap,new_sectors],ignore_index=True)
         modMap = modMap.sort_values(['plane','u','v'])
